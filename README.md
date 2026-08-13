@@ -1,19 +1,28 @@
-# polaris-site
+# Polaris Labs — marketing site
 
-Marketing site for Polaris Labs — makers of
-[Flagpole](https://github.com/kenny-io/flagpole-api) (a lightweight
-feature-flag REST API) and [Drift](https://github.com/kenny-io/driftkv)
-(a zero-dependency embedded key-value store for Node.js/TypeScript).
+Marketing site for Polaris Labs and its two products: **Flagpole** (a
+lightweight feature-flag REST API) and **Drift** (a zero-dependency embedded
+key-value store for Node.js).
 
-Plain static HTML + CSS, no build step. Open `index.html` in a browser or
-serve the directory with any static file server:
-
-```bash
-python3 -m http.server 8080
-```
+Built with Vite, React, and TypeScript, routed with react-router-dom.
 
 ## Pages
 
-- `index.html` — landing page
-- `products/flagpole.html` — Flagpole product page
-- `products/drift.html` — Drift product page
+All page copy lives inline as JSX in the page components:
+
+| Route       | File                     |
+| ----------- | ------------------------ |
+| `/`         | `src/pages/Home.tsx`     |
+| `/flagpole` | `src/pages/Flagpole.tsx` |
+| `/drift`    | `src/pages/Drift.tsx`    |
+
+Styling is the shared stylesheet at `src/styles.css`.
+
+## Develop
+
+```bash
+npm install
+npm run dev       # local dev server
+npm run build     # typecheck + production build to dist/
+npm run preview   # serve the production build
+```
