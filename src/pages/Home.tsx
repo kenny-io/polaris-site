@@ -2,243 +2,221 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 /**
- * Home page — Polaris Labs overview.
- * All marketing copy is authored inline as JSX text so prose edits land here.
+ * Polaris Labs overview.
+ * Product facts intentionally stay inline so connected knowledge surfaces can
+ * trace a marketing claim back to the exact page and commit that introduced it.
  */
 export default function Home() {
   useEffect(() => {
-    document.title = "Polaris Labs — Small, sharp infrastructure tools";
+    document.title = "Polaris Labs — Flagpole and Drift";
   }, []);
 
   return (
     <>
+      <a className="skip-link" href="#main-content">Skip to content</a>
+
       <header className="site-header">
         <div className="container nav">
-          <Link className="logo" to="/">
-            <span className="star">★</span> Polaris Labs
+          <Link className="logo" to="/" aria-label="Polaris Labs home">
+            <span className="star" aria-hidden="true">✦</span>
+            Polaris Labs
           </Link>
-          <ul className="nav-links">
-            <li>
-              <Link to="/flagpole">Flagpole</Link>
-            </li>
-            <li>
-              <Link to="/drift">Drift</Link>
-            </li>
-            <li>
-              <a href="https://github.com/kenny-io">GitHub</a>
-            </li>
-          </ul>
+          <nav aria-label="Primary navigation">
+            <ul className="nav-links">
+              <li><Link to="/flagpole">Flagpole</Link></li>
+              <li><Link to="/drift">Drift</Link></li>
+              <li><a href="https://polaris-labs.thally.app">Docs</a></li>
+              <li><a href="https://github.com/kenny-io">GitHub ↗</a></li>
+            </ul>
+          </nav>
         </div>
       </header>
 
-      <main>
-        {/* Hero */}
+      <main id="main-content">
         <section className="hero container">
-          <h1>
-            Small, sharp tools for{" "}
-            <span className="gradient">shipping with confidence</span>
-          </h1>
-          <p>
-            Polaris Labs builds focused developer infrastructure: a feature-flag
-            API you can run anywhere and an embedded key-value store with zero
-            dependencies. No platforms, no lock-in — just tools that do one
-            thing well.
-          </p>
-          <div className="cta-row">
-            <Link className="btn btn-primary" to="/flagpole">
-              Explore Flagpole
-            </Link>
-            <Link className="btn btn-secondary" to="/drift">
-              Explore Drift
-            </Link>
+          <div className="hero-copy">
+            <p className="eyebrow">Open-source infrastructure, kept small</p>
+            <h1>Feature flags over HTTP. An embedded KV store for Node.js.</h1>
+            <p className="hero-lede">
+              Polaris Labs maintains two focused tools: Flagpole is a
+              self-hosted feature-flag REST API, and Drift is a typed,
+              in-process key-value store with no runtime dependencies.
+            </p>
+            <div className="cta-row">
+              <a className="btn btn-primary" href="https://polaris-labs.thally.app">
+                Read the docs
+              </a>
+              <a className="text-link" href="https://github.com/kenny-io">
+                Browse the source <span aria-hidden="true">↗</span>
+              </a>
+            </div>
           </div>
+
+          <aside className="release-board" aria-label="Current releases">
+            <div className="release-board-header">
+              <span>Current releases</span>
+              <span className="status-dot">Source verified</span>
+            </div>
+            <div className="release-row">
+              <div>
+                <span className="release-name">flagpole-api</span>
+                <strong>1.0.0</strong>
+              </div>
+              <p>
+                31 HTTP routes · rollouts · environments · tags · history ·
+                webhook records
+              </p>
+              <Link to="/flagpole" aria-label="Explore Flagpole">
+                View product <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+            <div className="release-row drift-release">
+              <div>
+                <span className="release-name">driftkv</span>
+                <strong>0.2.0</strong>
+              </div>
+              <p>
+                zero runtime dependencies · namespaces · events · batches ·
+                transactions · atomic snapshots
+              </p>
+              <Link to="/drift" aria-label="Explore Drift">
+                View product <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </aside>
         </section>
 
-        {/* Products */}
-        <section className="section">
+        <section className="section products-section" aria-labelledby="products-title">
           <div className="container">
-            <h2 className="section-title">Two products, one philosophy</h2>
-            <p className="section-lede">
-              Everything we ship is small enough to read in an afternoon and
-              simple enough to operate without a dedicated team.
-            </p>
+            <div className="section-heading split-heading">
+              <div>
+                <p className="eyebrow">Two different jobs</p>
+                <h2 id="products-title" className="section-title">Start with the primitive you need</h2>
+              </div>
+              <p className="section-lede">
+                Both projects are MIT licensed and designed to run in your own
+                environment. They do not require a Polaris account or hosted
+                control plane.
+              </p>
+            </div>
 
             <div className="product-grid">
-              <div className="product-card">
-                <span className="tag">Flagpole v0.1.0</span>
-                <h3>Flagpole</h3>
+              <article className="product-card flagpole-card">
+                <div className="product-card-topline">
+                  <span className="product-index">01 / Flagpole</span>
+                  <span className="tag">v1.0.0</span>
+                </div>
+                <h3>A feature-flag API you can inspect end to end.</h3>
                 <p>
-                  A lightweight feature-flag REST API. Seven endpoints cover the
-                  full flag lifecycle — create, list, read, update, delete, and
-                  evaluate boolean flags — secured with bearer-token auth and
-                  persisted to a single JSON file.
+                  Run a Hono server on Node.js 20+, keep flags in memory or a
+                  JSON file, and evaluate boolean or percentage rollouts from
+                  any client that speaks HTTP.
                 </p>
-                <Link className="card-link" to="/flagpole">
-                  Flagpole features →
-                </Link>
-              </div>
+                <ul className="compact-list">
+                  <li>Optional bearer-token protection for every /v1 route</li>
+                  <li>Environment overrides, tags, history, and pagination</li>
+                  <li>Public health and version probes for deploy checks</li>
+                </ul>
+                <div className="card-actions">
+                  <Link className="card-link" to="/flagpole">Explore Flagpole →</Link>
+                  <a href="https://github.com/kenny-io/flagpole-api">GitHub ↗</a>
+                </div>
+              </article>
 
-              <div className="product-card">
-                <span className="tag indigo">Drift v0.1.0</span>
-                <h3>Drift</h3>
+              <article className="product-card drift-card">
+                <div className="product-card-topline">
+                  <span className="product-index">02 / Drift</span>
+                  <span className="tag indigo">v0.2.0</span>
+                </div>
+                <h3>A typed store that stays inside your process.</h3>
                 <p>
-                  A zero-dependency embedded key-value store for Node.js and
-                  TypeScript. In-process reads and writes with TTL expiry, LRU
-                  eviction, and optional JSON persistence — no server to run,
-                  nothing to install but the package.
+                  Install one ESM package on Node.js 18+ for TTLs, bounded LRU
+                  storage, scoped namespaces, lifecycle events, and optional
+                  JSON snapshots.
                 </p>
-                <Link className="card-link" to="/drift">
-                  Drift features →
-                </Link>
-              </div>
+                <ul className="compact-list">
+                  <li>Per-entry TTLs plus explicit expiry sweeps</li>
+                  <li>Batch and transaction helpers for related writes</li>
+                  <li>Atomic write-then-rename persistence and reload</li>
+                </ul>
+                <div className="card-actions">
+                  <Link className="card-link" to="/drift">Explore Drift →</Link>
+                  <a href="https://github.com/kenny-io/driftkv">GitHub ↗</a>
+                </div>
+              </article>
             </div>
           </div>
         </section>
 
-        {/* Capabilities */}
-        <section className="section">
+        <section className="section" aria-labelledby="examples-title">
           <div className="container">
-            <h2 className="section-title">What you get today</h2>
-            <p className="section-lede">
-              Concrete capabilities, not roadmap promises. This is what ships in
-              the current releases.
-            </p>
-
-            <div className="feature-grid">
-              <div className="feature">
-                <h4>7 REST endpoints</h4>
-                <p>
-                  Flagpole exposes a health check plus full CRUD and evaluation
-                  for flags: <code>GET /health</code>,{" "}
-                  <code>GET/POST /v1/flags</code>,{" "}
-                  <code>GET/PATCH/DELETE /v1/flags/:key</code>, and{" "}
-                  <code>GET /v1/flags/:key/evaluate</code>.
-                </p>
-              </div>
-              <div className="feature">
-                <h4>Boolean flags with bearer-token auth</h4>
-                <p>
-                  Every flag is a simple{" "}
-                  <code>{"{ key, description, enabled }"}</code> record.
-                  Requests are authorized with a bearer token set via{" "}
-                  <code>FLAGPOLE_API_TOKEN</code>.
-                </p>
-              </div>
-              <div className="feature">
-                <h4>JSON-file persistence</h4>
-                <p>
-                  Flagpole stores its flags in a single JSON file at the path
-                  you choose with <code>FLAGPOLE_DATA_FILE</code>. Back it up
-                  with <code>cp</code>, diff it in a PR, restore it in seconds.
-                </p>
-              </div>
-              <div className="feature">
-                <h4>TTL + LRU eviction</h4>
-                <p>
-                  Drift expires entries after a per-entry or store-wide TTL (
-                  <code>defaultTtlMs</code>) and evicts the least-recently-used
-                  entry once <code>maxEntries</code> is reached.
-                </p>
-              </div>
-              <div className="feature">
-                <h4>Zero dependencies</h4>
-                <p>
-                  Drift ships with an empty dependency tree. What you audit is
-                  what you run — no transitive supply chain to worry about.
-                </p>
-              </div>
-              <div className="feature">
-                <h4>Durable when you want it</h4>
-                <p>
-                  Drift is in-memory by default. Pass <code>persistPath</code>{" "}
-                  and call <code>flush()</code> to write the store to a JSON
-                  file you control.
-                </p>
-              </div>
+            <div className="section-heading">
+              <p className="eyebrow">Use the real interfaces</p>
+              <h2 id="examples-title" className="section-title">From clone or install to first result</h2>
+              <p className="section-lede">
+                These examples match the current product defaults: Flagpole
+                listens on port 3333, and Drift is an ESM package.
+              </p>
             </div>
-          </div>
-        </section>
-
-        {/* Code snippets */}
-        <section className="section">
-          <div className="container">
-            <h2 className="section-title">See it in action</h2>
-            <p className="section-lede">
-              Real calls against the current releases — copy, paste, run.
-            </p>
 
             <div className="code-cols">
-              <div>
-                <h4>Flagpole: create and evaluate a flag</h4>
+              <article className="code-panel">
+                <div className="code-panel-title"><span>Flagpole / evaluate</span><span>HTTP</span></div>
                 <pre>
-                  <code>{`curl -X POST http://localhost:3000/v1/flags \\
-  -H "Authorization: Bearer $FLAGPOLE_API_TOKEN" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "key": "new-checkout",
-    "description": "New checkout flow",
-    "enabled": false
-  }'
+                  <code>{`git clone https://github.com/kenny-io/flagpole-api.git
+cd flagpole-api && npm install && npm run dev
 
-curl http://localhost:3000/v1/flags/new-checkout/evaluate \\
-  -H "Authorization: Bearer $FLAGPOLE_API_TOKEN"`}</code>
+curl -X POST http://localhost:3333/v1/flags \\
+  -H 'content-type: application/json' \\
+  -d '{"key":"new-checkout","enabled":true}'
+
+curl http://localhost:3333/v1/flags/new-checkout/evaluate`}</code>
                 </pre>
-              </div>
+                <a href="https://polaris-labs.thally.app/guides/flagpole-api">
+                  Read the Flagpole guide →
+                </a>
+              </article>
 
-              <div>
-                <h4>Drift: cache with TTL and persistence</h4>
+              <article className="code-panel">
+                <div className="code-panel-title"><span>Drift / create a store</span><span>TypeScript</span></div>
                 <pre>
                   <code>{`import { createStore } from "driftkv";
 
-const store = createStore({
-  maxEntries: 1000,
+const cache = createStore<string>({
+  maxEntries: 1_000,
   defaultTtlMs: 60_000,
-  persistPath: "./cache.json",
 });
 
-store.set("session:42", { userId: "u_42" });
-store.get("session:42"); // { userId: "u_42" }
-store.has("session:42"); // true
-store.size();            // 1
-
-await store.flush();     // write to ./cache.json`}</code>
+cache.set("session:42", "active");
+cache.get("session:42"); // "active"`}</code>
                 </pre>
-              </div>
+                <a href="https://polaris-labs.thally.app/guides/using-namespaces">
+                  Read the Drift guide →
+                </a>
+              </article>
             </div>
           </div>
         </section>
 
-        {/* Why Polaris */}
-        <section className="section">
-          <div className="container">
-            <h2 className="section-title">Why teams pick Polaris tools</h2>
-            <p className="section-lede">
-              Most infrastructure tooling assumes you want a platform. We assume
-              you want your afternoon back.
-            </p>
+        <section className="section principles-section" aria-labelledby="scope-title">
+          <div className="container principles-grid">
+            <div>
+              <p className="eyebrow">Scope, stated plainly</p>
+              <h2 id="scope-title" className="section-title">Local primitives, not a managed platform</h2>
+            </div>
             <ul className="why-list">
               <li>
-                <strong>No hosted dashboard required.</strong> Flagpole is an
-                API you run yourself; your flags live in a JSON file you can
-                read, diff, and version.
+                <strong>Flagpole is self-hosted.</strong> There is no bundled
+                dashboard or language-specific SDK; clients call its HTTP API.
               </li>
               <li>
-                <strong>No client SDK sprawl.</strong> Flagpole speaks plain
-                HTTP — any language with an HTTP client is already integrated.
+                <strong>Drift is process-local.</strong> It does not coordinate
+                data across machines and is not a replacement for a shared database.
               </li>
               <li>
-                <strong>No external cache server.</strong> Drift runs inside
-                your Node.js process, so there is no Redis to provision for a
-                hot-path cache.
-              </li>
-              <li>
-                <strong>Auditable by design.</strong> Drift has zero runtime
-                dependencies, and Flagpole's entire API surface is seven
-                endpoints.
-              </li>
-              <li>
-                <strong>Honest versioning.</strong> Both products are at v0.1.0
-                — early, focused, and documented exactly as they behave today.
+                <strong>Persistence is explicit.</strong> Both tools can use
+                JSON files you control, with in-memory operation available when
+                durability is unnecessary.
               </li>
             </ul>
           </div>
@@ -247,22 +225,11 @@ await store.flush();     // write to ./cache.json`}</code>
 
       <footer className="site-footer">
         <div className="container footer-inner">
-          <span>© 2026 Polaris Labs. Built in the open.</span>
+          <span>© 2026 Polaris Labs · MIT-licensed developer tools</span>
           <ul className="footer-links">
-            <li>
-              <Link to="/flagpole">Flagpole</Link>
-            </li>
-            <li>
-              <Link to="/drift">Drift</Link>
-            </li>
-            <li>
-              <a href="https://github.com/kenny-io/flagpole-api">
-                flagpole-api
-              </a>
-            </li>
-            <li>
-              <a href="https://github.com/kenny-io/driftkv">driftkv</a>
-            </li>
+            <li><a href="https://polaris-labs.thally.app">Docs</a></li>
+            <li><a href="https://github.com/kenny-io/flagpole-api">Flagpole</a></li>
+            <li><a href="https://github.com/kenny-io/driftkv">Drift</a></li>
           </ul>
         </div>
       </footer>
