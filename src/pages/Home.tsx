@@ -73,11 +73,11 @@ export default function Home() {
             <div className="release-row drift-release">
               <div>
                 <span className="release-name">driftkv</span>
-                <strong>0.2.0</strong>
+                <strong>0.4.0</strong>
               </div>
               <p>
                 zero runtime dependencies · namespaces · events · batches ·
-                transactions · atomic snapshots
+                transactions · capacity stats · atomic snapshots
               </p>
               <Link to="/drift" aria-label="Explore Drift">
                 View product <span aria-hidden="true">→</span>
@@ -126,7 +126,7 @@ export default function Home() {
               <article className="product-card drift-card">
                 <div className="product-card-topline">
                   <span className="product-index">02 / Drift</span>
-                  <span className="tag indigo">v0.2.0</span>
+                  <span className="tag indigo">v0.4.0</span>
                 </div>
                 <h3>A typed store that stays inside your process.</h3>
                 <p>
