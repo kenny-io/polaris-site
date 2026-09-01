@@ -34,13 +34,13 @@ export default function Drift() {
       <main id="main-content">
         <section className="page-hero container drift-page-hero">
           <div className="page-hero-copy">
-            <p className="version">Drift · v0.2.0 · MIT</p>
+            <p className="version">Drift · v0.4.0 · MIT</p>
             <h1>A typed key-value store that lives inside your process.</h1>
             <p>
               Drift is an ESM package for Node.js with TTL expiry, bounded LRU
-              storage, namespaces, lifecycle events, batch helpers, and
-              optional JSON persistence. It has zero runtime dependencies and
-              no server to operate.
+              storage, capacity snapshots, namespaces, lifecycle events, batch
+              helpers, and optional JSON persistence. It has zero runtime
+              dependencies and no server to operate.
             </p>
             <div className="cta-row">
               <a className="btn btn-primary" href="https://polaris-labs.thally.app/guides/using-namespaces">Read the docs</a>
@@ -61,7 +61,7 @@ store.set("status", "ready");`}</code></pre>
         <section className="fact-strip drift-fact-strip" aria-label="Drift release facts">
           <div className="container fact-strip-inner">
             <div><strong>0</strong><span>runtime dependencies</span></div>
-            <div><strong>18</strong><span>store methods</span></div>
+            <div><strong>19</strong><span>store methods</span></div>
             <div><strong>4</strong><span>lifecycle events</span></div>
             <div><strong>1</strong><span>optional JSON snapshot</span></div>
           </div>
@@ -96,6 +96,8 @@ store.set("status", "ready");`}</code></pre>
                   <code>maxEntries</code> caps live data. Reads and writes
                   refresh recency, while <code>peek()</code> and
                   <code>has()</code> inspect without changing eviction order.
+                  A stats() call returns store-wide capacity counters without
+                  perturbing recency.
                 </p>
               </article>
               <article className="feature drift-feature">
